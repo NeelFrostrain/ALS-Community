@@ -3,7 +3,7 @@
 
 Replicated and optimized version of [Advanced Locomotion System V4](https://www.unrealengine.com/marketplace/en-US/product/advanced-locomotion-system-v1) for **Unreal Engine 5.4** with additional bug fixes
 
-<p align="center">
+<p align="left">
   <a href="https://discord.gg/6yhHP2e8Jx"><img src="https://i.imgur.com/LP9bZQj.png"></a>
 </p>
 
