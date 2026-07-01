@@ -280,6 +280,23 @@ bool UALSMantleComponent::MantleCheck(const FALSMantleTraceSettings& TraceSettin
 		MantleType = MantleHeight > 125.0f ? EALSMantleType::HighMantle : EALSMantleType::LowMantle;
 	}
 
+	if (MantleType == EALSMantleType::FallingCatch)
+	{
+		FVector GroundTraceStart = CapsuleBaseLocation;
+		GroundTraceStart.Z = DownTraceLocation.Z;
+		FVector GroundTraceEnd = GroundTraceStart;
+		GroundTraceEnd.Z -= 70.0f;
+		
+		const float CapsuleRadius = OwnerCharacter->GetCapsuleComponent()->GetScaledCapsuleRadius();
+		const FCollisionShape CapsuleCollisionShape = FCollisionShape::MakeCapsule(CapsuleRadius, CapsuleRadius);
+		const bool bHitGround = World->SweepSingleByProfile(HitResult, GroundTraceStart, GroundTraceEnd, FQuat::Identity, MantleObjectDetectionProfile, CapsuleCollisionShape, Params);
+
+		if (bHitGround)
+		{
+			return false;
+		}
+	}
+
 	// Step 5: If everything checks out, start the Mantle
 	FALSComponentAndTransform MantleWS;
 	MantleWS.Component = HitComponent;
